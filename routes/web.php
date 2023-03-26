@@ -19,9 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-Route::resource('outlet', App\Http\Controllers\OutletController::class)->name('outlet');
-Route::resource('paket-kiloan', App\Http\Controllers\PaketKiloanController::class)->name('paket-kiloan');
-Route::resource('paket-satuan', App\Http\Controllers\PaketSatuanController::class)->name('paket-satuan');
-Route::resource('checkout-kiloan', App\Http\Controllers\CheckoutKiloanController::class)->name('checkout-kiloan');
-Route::resource('checkout-satuan', App\Http\Controllers\CheckoutSatuanController::class)->name('checkout-satuan');
-Route::resource('transaksi', App\Http\Controllers\TransaksiController::class)->name('transaksi');
+Route::resource('outlet', App\Http\Controllers\OutletController::class);
+Route::resource('paket-kiloan', App\Http\Controllers\PaketKiloanController::class);
+Route::resource('paket-satuan', App\Http\Controllers\PaketSatuanController::class);
+Route::resource('checkout-kiloan', App\Http\Controllers\CheckoutKiloanController::class);
+Route::resource('checkout-satuan', App\Http\Controllers\CheckoutSatuanController::class);
+Route::resource('transaksi', App\Http\Controllers\TransaksiController::class);

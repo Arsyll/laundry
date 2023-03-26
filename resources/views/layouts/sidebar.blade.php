@@ -17,7 +17,7 @@
             <li class="nav-item @yield('dashboard')"><a class="d-flex align-items-center" href="{{ url('dashboard') }}"><i
                         data-feather='home'></i><span class="menu-title">Dashboard</span></a>
             </li>
-            <li class=" nav-item"><a href="#"><i data-feather='database'></i><span class="menu-title">Kelola Data</span></a>
+            <li class=" nav-item"><a href="#"><i data-feather='grid'></i><span class="menu-title">Kelola Data</span></a>
                 <ul class="menu-content">
                   <li class="nav-item @yield('karyawan')">
                     <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Karyawan</span></a>
@@ -30,7 +30,7 @@
                   </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a href="#"><i data-feather='list'></i><span class="menu-title">Layanan</span></a>
+            <li class=" nav-item"><a href="#"><i data-feather='server'></i><span class="menu-title">Layanan</span></a>
                 <ul class="menu-content">
                   <li class="nav-item @yield('register_customer')">
                     <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Register Customer</span></a>
@@ -43,7 +43,7 @@
                   </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a href="#"><i data-feather='book'></i><span class="menu-title">Laporan</span></a>
+            <li class=" nav-item"><a href="#"><i data-feather='file-text'></i><span class="menu-title">Laporan</span></a>
                 <ul class="menu-content">
                   <li class="nav-item @yield('laporan_karyawan')">
                     <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Laporan Karyawan</span></a>

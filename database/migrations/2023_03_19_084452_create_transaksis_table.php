@@ -21,12 +21,13 @@ return new class extends Migration
             $table->date('tgl_selesai')->nullable();
             $table->date('tgl_bayar')->nullable();
             $table->integer('diskon')->nullable();
-            $table->bigInteger('pajak')->nullable();
-            $table->enum('status',['Diproses','Selesai','Diantar','Diterima'])->default('Diproses');
+            $table->float('pajak')->nullable();
+            $table->enum('status_order',['Diproses','Selesai','Diantar','Diterima'])->default('Diproses');
+            $table->enum('status_payment',['Pending','Success'])->default('Pending');
             $table->string('ket_bayar')->nullable();
-            $table->bigInteger('harga_total');
-            $table->bigInteger('harga_bayar')->nullable();
-            $table->bigInteger('harga_kembali')->nullable();
+            $table->float('harga_total');
+            $table->float('harga_bayar')->nullable();
+            $table->float('harga_kembali')->nullable();
             $table->timestamps();
         });
     }
