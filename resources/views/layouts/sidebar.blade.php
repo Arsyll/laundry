@@ -20,13 +20,13 @@
             <li class=" nav-item"><a href="#"><i data-feather='grid'></i><span class="menu-title">Kelola Data</span></a>
                 <ul class="menu-content">
                   <li class="nav-item @yield('karyawan')">
-                    <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Karyawan</span></a>
+                    <a href="{{route('karyawan')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Karyawan</span></a>
                   </li>
                   <li class="nav-item @yield('paket')">
-                    <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Paket</span></a>
+                    <a href="{{route('paket-kiloan.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Paket</span></a>
                   </li>
                   <li class="nav-item @yield('outlet')">
-                    <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Outlet</span></a>
+                    <a href="{{route('outlet.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Outlet</span></a>
                   </li>
                 </ul>
             </li>
@@ -36,7 +36,7 @@
                     <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Register Customer</span></a>
                   </li>
                   <li class="nav-item @yield('customer')">
-                    <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Kelola Customer</span></a>
+                    <a href="{{route('customer')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Kelola Customer</span></a>
                   </li>
                   <li class="nav-item @yield('transaksi')">
                     <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Transaksi</span></a>

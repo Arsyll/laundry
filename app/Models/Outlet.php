@@ -13,7 +13,7 @@ class Outlet extends Model
     protected $fillable = [
         'nama',
         'alamat',
-        'hotlline',
+        'hotline',
         'email',
         'iframe_script',
     ];

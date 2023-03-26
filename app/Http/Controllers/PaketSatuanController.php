@@ -21,7 +21,9 @@ class PaketSatuanController extends Controller
      */
     public function create()
     {
-        //
+        $data['paket'] = PaketKiloan::orderBy('nama_paket','asc')->get();
+        $data['satuan'] = PaketSatuan::orderBy('nama_barang','asc')->get();
+        return view('admin.paket.form_barang', $data);
     }
 
     /**

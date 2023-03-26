@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
         $data['customer'] = User::where('role','Customer')->get();
         $data['masuk'] = Transaksi::whereIN('status_order',['Diproses','Selesai','Diantar','Diterima'])->count();
-        $data['selesai'] = Transaksi::where('status_order','Selesai')->count();
+        $data['selesai'] = Transaksi::whereIN('status_order',['Selesai','Diantar','Diterima'])->count();
         $data['diambil'] = Transaksi::where('status_order','Diterima')->count();
         $data['sudahbayar'] = Transaksi::where('status_payment','Success')->count();
         $data['belumbayar'] = Transaksi::where('status_payment','Pending')->count();

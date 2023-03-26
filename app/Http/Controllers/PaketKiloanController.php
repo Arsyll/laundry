@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PaketKiloan;
+use App\Models\PaketSatuan;
 use App\Http\Requests\StorePaketKiloanRequest;
 use App\Http\Requests\UpdatePaketKiloanRequest;
 
@@ -13,15 +14,21 @@ class PaketKiloanController extends Controller
      */
     public function index()
     {
-        //
+        $data['paket'] = PaketKiloan::orderBy('nama_paket','asc')->get();
+        $data['satuan'] = PaketSatuan::orderBy('nama_barang','asc')->get();
+        return view('admin.paket.index', $data);
     }
 
+    public function kelola_paket(){
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $data['paket'] = PaketKiloan::orderBy('nama_paket','asc')->get();
+        $data['satuan'] = PaketSatuan::orderBy('nama_barang','asc')->get();
+        return view('admin.paket.index', $data);
     }
 
     /**

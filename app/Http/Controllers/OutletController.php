@@ -13,7 +13,15 @@ class OutletController extends Controller
      */
     public function index()
     {
-        //
+        $data['outlet'] = Outlet::orderBy('nama','asc')->get();
+        return view('owner.outlet.index', $data);
+
+    }
+    public function isi(){
+        return response()->json([
+            'massage' => 'List Outlet',
+            'data' => Outlet::all()
+        ]);
     }
 
     /**
@@ -29,15 +37,37 @@ class OutletController extends Controller
      */
     public function store(StoreOutletRequest $request)
     {
-        //
+        $request->validate = [
+            'nama' => 'required|unique:outlet',
+            'alamat' => 'required',
+            'hotline' => 'required',
+            'email' => 'required',
+        ];
+        $status = Outlet::create([
+            'nama' => $request['nama'],
+            'alamat' => $request['alamat'],
+            'hotline' => $request['hotline'],
+            'email' => $request['email'],
+            'iframe_script' => $request['iframe_script'],
+        ]);
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Outlet berhasi ditambah!',
+            'data' => $status
+        ]);
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Outlet $outlet)
+    public function show($id)
     {
-        //
+        return response()->json([
+            'message' => 'detail outlet!',
+            'data' => Outlet::findOrFail($id)
+        ]);
     }
 
     /**
@@ -51,9 +81,23 @@ class OutletController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOutletRequest $request, Outlet $outlet)
+    public function update(UpdateOutletRequest $request, $id)
     {
-        //
+        $rule = [
+            // 'nama' => 'required'
+        ];
+        $this->validate($request, $rule);
+
+        $input = $request->all();
+        $outlet = Outlet::find($id);
+        $status = $outlet->update($input);
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Kategori berhasil diubah!',
+            'data' => $status
+        ]);
+
     }
 
     /**
@@ -61,6 +105,9 @@ class OutletController extends Controller
      */
     public function destroy(Outlet $outlet)
     {
-        //
+        $outlet->findOrFail($outlet->id)->delete($outlet);
+        return response()->json([
+            'message' => 'Outlet berhasil dihapus!'
+        ]);
     }
 }
