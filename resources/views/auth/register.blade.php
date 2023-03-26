@@ -59,62 +59,85 @@
                 <div class="auth-wrapper auth-v1 px-2">
                     <div class="auth-inner py-2">
                         <!-- Register v1 -->
-                        <form method="POST" action="{{ route('register') }}">
-                            @csrf
-                            <div class="card mb-0">
-                                <div class="card-body">
-                                    <a href="javascript:void(0);" class="brand-logo">
-                                        <h2 class="brand-text text-primary ml-1">{{ config('app.name', 'Laravel') }}
-                                        </h2>
-                                    </a>
 
-                                    <h4 class="card-title mb-1 text-center">Laundry Terbaik Untuk Keluarga Anda.
-                                    </h4>
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                <a href="javascript:void(0);" class="brand-logo">
+                                    <h2 class="brand-text text-primary ml-1">{{ config('app.name', 'Laravel') }}
+                                    </h2>
+                                </a>
 
-                                    <form class="auth-register-form mt-2" action="index.html" method="POST">
-                                        <div class="form-group">
-                                            {{-- <label for="register-username" class="form-label">Username</label>
-                                            <input type="text" class="form-control" id="register-username"
-                                                name="register-username" placeholder="johndoe"
-                                                aria-describedby="register-username" tabindex="1" autofocus /> --}}
+                                <h4 class="card-title mb-1 text-center">Laundry Terbaik Untuk Keluarga Anda.
+                                </h4>
 
-                                            <label for="email" class="form-label">{{ __('Email Address') }}</label>
-                                            <input id="email" type="email"
-                                                class="form-control @error('email') is-invalid @enderror" name="email"
-                                                value="{{ old('email') }}" required autocomplete="email">
+                                <form method="POST" action="{{ route('register') }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="nama" class="form-label">{{ __('Nama') }}</label>
 
-                                            @error('email')
+                                        <input id="nama" type="text"
+                                            class="form-control @error('nama') is-invalid @enderror" name="nama"
+                                            value="{{ old('nama') }}" required autocomplete="nama" autofocus>
+
+                                        @error('nama')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">{{ __('Alamat Email') }}</label>
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required autocomplete="email">
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password" class="form-label">{{ __('Password') }}</label>
+                                        <div class="input-group input-group-merge form-password-toggle">
+                                            <input id="password" type="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                name="password"
+                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                                aria-describedby="register-password" tabindex="3">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text cursor-pointer"><i
+                                                        data-feather="eye"></i></span>
+                                            </div>
+                                            @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
-
-                                        <div class="form-group">
-                                            <label for="register-password" class="form-label">Password</label>
-
-                                         
-
-                                            <label for="password"
-                                                class="form-label">{{ __('Password') }}</label>
-                                                <div class="input-group input-group-merge form-password-toggle">
-                                                    <input id="password" type="password"
-                                                        class="form-control @error('password') is-invalid @enderror"
-                                                        name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                        aria-describedby="register-password" tabindex="3">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text cursor-pointer"><i
-                                                                    data-feather="eye"></i></span>
-                                                        </div>
-                                                    @error('password')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password-confirm"
+                                            class="">{{ __('Konfirmasi Password') }}</label>
+                                        <div class="input-group input-group-merge form-password-toggle">
+                                            <input id="password-confirm" type="password" class="form-control"
+                                                name="password_confirmation" required autocomplete="new-password"
+                                                @error('password') is-invalid @enderror
+                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                                aria-describedby="register-password" tabindex="3">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text cursor-pointer"><i
+                                                        data-feather="eye"></i></span>
+                                            </div>
+                                            @error('password-confirm')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
-
-                                        <div class="form-group">
+                                    </div>
+                                    {{-- <div class="form-group">
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input" type="checkbox"
                                                     id="privacy_policy" required tabindex="4" />
@@ -123,19 +146,18 @@
                                                         terms</a>
                                                 </label>
                                             </div>
-                                        </div>
-                                        <button class="btn btn-primary btn-block" type="submit">Buat Akun</button>
-                                    </form>
+                                        </div> --}}
+                                    <button class="btn btn-primary btn-block" type="submit">Buat Akun</button>
+                                </form>
 
-                                    <p class="text-center mt-2">
-                                        <span>Sudah punya akun?</span>
-                                        <a href="{{ route('login') }}">
-                                            <span>Masuk</span>
-                                        </a>
-                                    </p>
-                                </div>
+                                <p class="text-center mt-2">
+                                    <span>Sudah punya akun?</span>
+                                    <a href="{{ route('login') }}">
+                                        <span>Masuk</span>
+                                    </a>
+                                </p>
                             </div>
-                        </form>
+                        </div>
                         <!-- /Register v1 -->
                     </div>
                 </div>
@@ -146,7 +168,7 @@
     <!-- END: Content-->
 
 
-    <script>
+    {{-- <script>
         function validateForm() {
             var checkBox = document.getElementById("privacy_policy");
             if (!checkBox.checked) {
@@ -154,7 +176,7 @@
                 return false;
             }
         }
-    </script>
+    </script> --}}
     <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('assets/template') }}/vendors/js/vendors.min.js"></script>
     <!-- BEGIN Vendor JS-->

@@ -22,11 +22,11 @@ return new class extends Migration
             $table->date('tgl_bayar')->nullable();
             $table->integer('diskon')->nullable();
             $table->bigInteger('pajak')->nullable();
-            $table->string('status');
-            $table->string('ket_bayar');
+            $table->enum('status',['Diproses','Selesai','Diantar','Diterima'])->default('Diproses');
+            $table->string('ket_bayar')->nullable();
             $table->bigInteger('harga_total');
-            $table->bigInteger('harga_bayar');
-            $table->bigInteger('harga_kembali');
+            $table->bigInteger('harga_bayar')->nullable();
+            $table->bigInteger('harga_kembali')->nullable();
             $table->timestamps();
         });
     }

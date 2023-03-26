@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('checkout_kiloans', function (Blueprint $table) {
+        Schema::create('checkout_kiloan', function (Blueprint $table) {
             $table->id();
             $table->string('kd_invoice');
             $table->string('id_paket');
             $table->integer('berat_barang');
-            $table->string('metode_pembayaran');
+            $table->enum('metode_pembayaran',['Outlet','Rumah'])->default('Outlet');
             $table->bigInteger('harga_paket');
             $table->bigInteger('harga_antar')->default(0);
             $table->bigInteger('harga_total');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('checkout_kiloans');
+        Schema::dropIfExists('checkout_kiloan');
     }
 };

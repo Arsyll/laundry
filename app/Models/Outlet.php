@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Outlet extends Model
 {
     use HasFactory;
+
+    public $table = 'outlet';
+    protected $fillable = [
+        'nama',
+        'alamat',
+        'hotlline',
+        'email',
+        'iframe_script',
+    ];
 }

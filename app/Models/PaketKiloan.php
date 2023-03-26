@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class PaketKiloan extends Model
 {
     use HasFactory;
+
+    public $table = 'paket_kiloan';
+    protected $fillable = [
+        'nama_paket',
+        'harga_paket',
+        'hari_paket',
+        'min_berat_paket',
+        'antar_jemput_paket',
+        'id_outlet',
+    ];
 }
