@@ -87,28 +87,34 @@
                                                                                 <td>{{ $paket_kilo->min_berat_paket }}
                                                                                     Kg</td>
                                                                                 <td style="text-align: center;">
-                                                                                    <div class="dropdown custom-dropdown">
-                                                                                        <div data-toggle="dropdown"
-                                                                                            style="padding: 5px;">
-                                                                                            <i class="fa fa-ellipsis-v c-primary"
-                                                                                                style="font-size: 16px;"></i>
+                                                                                    <div class="dropdown">
+                                                                                        <button type="button"
+                                                                                            class="btn btn-sm dropdown-toggle hide-arrow"
+                                                                                            data-toggle="dropdown">
+                                                                                            <i
+                                                                                                data-feather="more-vertical"></i>
+                                                                                        </button>
+
+                                                                                        <div class="dropdown-menu">
+                                                                                            <a
+                                                                                                class="dropdown-item"id="lihat-btn"href="#"data-id="data.id"data-toggle="modal"data-target="#form-modal-lihat">
+                                                                                                <i data-feather="eye"
+                                                                                                    class="mr-50"></i>
+                                                                                                <span>Lihat</span>
+                                                                                                <a
+                                                                                                    class="dropdown-item"id="update-btn"href="#"data-id="data.id"data-toggle="modal"data-target="#form-modal-edit">
+                                                                                                    <i
+                                                                                                        data-feather="edit-2"class="mr-50"></i>
+                                                                                                    <span>Edit</span>
+                                                                                                </a>
+                                                                                                <a
+                                                                                                    class="dropdown-item"id="del-btn"href="#"data-id="data.id">
+                                                                                                    <i data-feather="trash"
+                                                                                                        class="mr-50"></i>
+                                                                                                    <span>Hapus</span>
+                                                                                                </a>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="dropdown-menu dropdown-menu-right">
-                                                                                            <a class="dropdown-item lihat_btn_kilo"
-                                                                                                href="#"
-                                                                                                role="button"
-                                                                                                data-lihat="{{ $paket_kilo->id }}"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#lihatModalKiloan">Lihat</a>
-                                                                                            <a class="dropdown-item"
-                                                                                                href="{{ url('/edit_paket_kiloan/' . $paket_kilo->id) }}">Edit</a>
-                                                                                        </div>
-                                                                                    </div>&nbsp;&nbsp;
-                                                                                    <a href="{{ url('/hapus_paket_kiloan/' . $paket_kilo->id) }}"
-                                                                                        style="color: grey;"><i
-                                                                                            class="fa fa-trash c-primary"
-                                                                                            style="font-size: 16px;"></i></a>
+                                                                                    </div>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach
@@ -163,28 +169,30 @@
                                                                                     {{ number_format($paket_satu->harga_barang, 2, ',', '.') }}
                                                                                 </td>
                                                                                 <td style="text-align: center;">
-                                                                                    <div class="dropdown custom-dropdown">
-                                                                                        <div data-toggle="dropdown"
-                                                                                            style="padding: 5px;">
-                                                                                            <i class="fa fa-ellipsis-v c-primary"
-                                                                                                style="font-size: 16px;"></i>
+                                                                                    <div class="dropdown">
+                                                                                        <button type="button"
+                                                                                            class="btn btn-sm dropdown-toggle hide-arrow"
+                                                                                            data-toggle="dropdown">
+                                                                                            <i
+                                                                                                data-feather="more-vertical"></i>
+                                                                                        </button>
+
+                                                                                        <div class="dropdown-menu">
+                                                                                            <a class="dropdown-item" id="lihat-btn" href="{{ route('paket-satuan.show',$paket_satu->id) }}">
+                                                                                                <i data-feather="eye" class="mr-50"></i>
+                                                                                                <span>Lihat</span>
+                                                                                                <a class="dropdown-item"id="update-btn"href="{{ route('paket-satuan.edit',$paket_satu->id) }}">
+                                                                                                    <i data-feather="edit-2" class="mr-50"></i>
+                                                                                                    <span>Edit</span>
+                                                                                                </a>
+                                                                                                <a
+                                                                                                    class="dropdown-item" id="del-satuan-btn" href="#"data-id="{{ $paket_satu->id }}">
+                                                                                                    <i data-feather="trash"
+                                                                                                        class="mr-50"></i>
+                                                                                                    <span>Hapus</span>
+                                                                                                </a>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="dropdown-menu dropdown-menu-right">
-                                                                                            <a class="dropdown-item lihat_btn_satu"
-                                                                                                href="#"
-                                                                                                role="button"
-                                                                                                data-lihat="{{ $paket_satu->id }}"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#lihatModalSatuan">Lihat</a>
-                                                                                            <a class="dropdown-item"
-                                                                                                href="{{ url('/edit_paket_satuan/' . $paket_satu->id) }}">Edit</a>
-                                                                                        </div>
-                                                                                    </div>&nbsp;&nbsp;
-                                                                                    <a href="{{ url('/hapus_paket_satuan/' . $paket_satu->id) }}"
-                                                                                        style="color: grey;"><i
-                                                                                            class="fa fa-trash c-primary"
-                                                                                            style="font-size: 16px;"></i></a>
+                                                                                    </div>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach
@@ -218,12 +226,55 @@
 @endpush
 
 @push('scripts')
-    <script type="text/javascript">
+<script>
+        $(document).on('click', '#del-satuan-btn', function () {
+            var id = $(this).data('id');
+            Swal.fire({
+                icon: 'error',
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#28C76F',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            })
+            .then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        'url': '{{url('paket-satuan')}}/' + id,
+                        'type': 'POST',
+                        'data': {
+                            '_method': 'DELETE',
+                            '_token': '{{csrf_token()}}'
+                        },
+                        success: function (response) {
+                            if (response == 1) {
+                                        toastr.error('Data gagal dihapus!', 'Gagal!', {
+                                            closeButton: true,
+                                            tapToDismiss: false
+                                        });
+                                    } else {
+                                        toastr.success('Data berhasil dihapus!', 'Berhasil!', {
+                                            closeButton: true,
+                                            tapToDismiss: false
+                                        });
+                                        location.reload();
+                                    }
+
+                        }
+                    });
+                } else {
+                    console.log(`dialog was dismissed by ${result.dismiss}`)
+                }
+            });
+        });
         $(document).on('click', '.lihat_btn_kilo', function(e) {
             e.preventDefault();
             var id = $(this).attr('data-lihat');
             $.ajax({
-                url: "{{ url('/paket-kiloan') }}/" + id,
+                url: "{{ url('/paket-kiloan') }}/"+
+                id,
                 method: "GET",
                 success: function(response) {
                     $('.kd_paket').val(response.kd_paket);
@@ -247,7 +298,8 @@
             e.preventDefault();
             var id = $(this).attr('data-lihat');
             $.ajax({
-                url: "{{ url('/paket-satuan') }}/" + id,
+                url: "{{ url('/paket-satuan') }}/"+
+                id,
                 method: "GET",
                 success: function(response) {
                     $('.kd_barang').val(response.kd_barang);
@@ -299,59 +351,5 @@
                 tapToDismiss: !1
             })
         }
-
-        @if ($message = Session::get('tersimpan'))
-            var simpan = "{{ $message }}";
-            if (simpan == "kiloan") {
-                swal(
-                    "Berhasil!",
-                    "Paket kiloan baru berhasil ditambahkan",
-                    "success"
-                );
-            } else if (simpan == "satuan") {
-                swal(
-                    "Berhasil!",
-                    "Paket satuan baru berhasil ditambahkan",
-                    "success"
-                );
-                $('.paket_satuan_tab').click();
-            }
-        @endif
-
-        @if ($message = Session::get('terhapus'))
-            var hapus = "{{ $message }}";
-            if (hapus == "kiloan") {
-                swal(
-                    "Berhasil!",
-                    "Paket kiloan berhasil dihapus",
-                    "success"
-                );
-            } else if (hapus == "satuan") {
-                swal(
-                    "Berhasil!",
-                    "Paket satuan berhasil dihapus",
-                    "success"
-                );
-                $('.paket_satuan_tab').click();
-            }
-        @endif
-
-        @if ($message = Session::get('terubah'))
-            var ubah = "{{ $message }}";
-            if (ubah == "kiloan") {
-                swal(
-                    "Berhasil!",
-                    "Paket kiloan berhasil diubah",
-                    "success"
-                );
-            } else if (ubah == "satuan") {
-                swal(
-                    "Berhasil!",
-                    "Paket satuan berhasil diubah",
-                    "success"
-                );
-                $('.paket_satuan_tab').click();
-            }
-        @endif
     </script>
 @endpush

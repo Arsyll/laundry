@@ -19,6 +19,16 @@ class PaketKiloanController extends Controller
         return view('admin.paket.index', $data);
     }
 
+    /**
+     * Display a listing of the resource.
+     */
+    public function paket()
+    {
+        $data['paket'] = PaketKiloan::orderBy('nama_paket','asc')->get();
+        $data['satuan'] = PaketSatuan::orderBy('nama_barang','asc')->get();
+        return view('admin.paket.index', $data);
+    }
+
     public function kelola_paket(){
     }
     /**

@@ -23,7 +23,7 @@
                     <a href="{{route('karyawan')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Karyawan</span></a>
                   </li>
                   <li class="nav-item @yield('paket')">
-                    <a href="{{route('paket-kiloan.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Paket</span></a>
+                    <a href="{{route('paket')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Paket</span></a>
                   </li>
                   <li class="nav-item @yield('outlet')">
                     <a href="{{route('outlet.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Outlet</span></a>

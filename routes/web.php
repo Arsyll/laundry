@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::get('/karyawan', [App\Http\Controllers\UserController::class, 'karyawan'])->name('karyawan');
 Route::get('/customer', [App\Http\Controllers\UserController::class, 'customer'])->name('customer');
+Route::get('/paket', [App\Http\Controllers\PaketKiloanController::class, 'paket'])->name('paket');
 
 
 Route::resource('outlet', App\Http\Controllers\OutletController::class);

@@ -63,7 +63,7 @@
     </div>
 
     @include('owner.outlet.form')
-    @include('owner.outlet.lihat')
+    @include('owner.outlet.detail')
 
 @endsection
 
@@ -258,9 +258,9 @@
                                 '</button>' +
 
                                 '<div class="dropdown-menu">' +
-                                '<a class="dropdown-item" id="lihat-btn" href="#" data-id="' +
+                                '<a class="dropdown-item " id="lihat-btn" href="#" data-lihat="' +
                                 data.id +
-                                '" data-toggle="modal" data-target="#form-modal-lihat">' +
+                                '" data-toggle="modal" data-target="#lihatModal">' +
                                 '<i data-feather="eye" class="mr-50"></i>' +
                                 '<span>Lihat</span>' +
                                 '<a class="dropdown-item" id="update-btn" href="#" data-id="' +
@@ -291,6 +291,29 @@
                     }
                 });
             }
+        });
+        $(document).on('click', '#lihat-btn', function(e) {
+            e.preventDefault();
+            var id = $(this).attr('data-lihat');
+            $.ajax({
+                url: "{{ url('outlet') }}/" + id,
+                method: "GET",
+                success: function(response) {
+                    console.log(response);
+                    $('.nama_outlet').val(response.data.nama);
+                    $('.hotline_outlet').val(response.data.hotline);
+                    $('.email_outlet').val(response.data.email);
+                    $('.alamat_outlet').val(response.data.alamat);
+                    if (response.iframe_script == null) {
+                        $('.not_available_map').attr('hidden', false);
+                        $('.available_map').attr('hidden', true);
+                    } else {
+                        $('.not_available_map').attr('hidden', true);
+                        $('.available_map').attr('hidden', false);
+                        $('.available_map').html(response.iframe_script);
+                    }
+                }
+            });
         });
     </script>
 @endpush

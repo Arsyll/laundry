@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Outlet;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreOutletRequest;
 use App\Http\Requests\UpdateOutletRequest;
 
