@@ -11,6 +11,7 @@ class PaketKiloan extends Model
 
     public $table = 'paket_kiloan';
     protected $fillable = [
+        'kd_paket',
         'nama_paket',
         'harga_paket',
         'hari_paket',

@@ -11,6 +11,7 @@ class PaketSatuan extends Model
 
     public $table = 'paket_satuan';
     protected $fillable = [
+        'kd_barang',
         'nama_barang',
         'ket_barang',
         'harga_barang',

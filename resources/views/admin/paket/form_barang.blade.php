@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Outlet')
+@section('title', 'Paket Satuan')
 @section('paket', 'active')
 
 @section('content')
@@ -27,176 +27,70 @@
                 <div class="content-body">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <ul class="nav nav-tabs mb-3" role="tablist">
-                                    <li class="nav-item"><a class="nav-link paket_kiloan_tab active" data-toggle="tab"
-                                            href="#paket_kiloan">Paket Kiloan</a>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link paket_satuan_tab" data-toggle="tab"
-                                            href="#paket_satuan">Paket Satuan</a>
-                                    </li>
-                                </ul>
-                            </div>
                             <div class="card-body">
-                                <!-- Nav tabs -->
-                                <div class="default-tab">
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="paket_kiloan" role="tabpanel">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="card" style="background-color: #f4f3f9;">
-                                                        <div class="card-body">
-                                                            <div class="d-flex justify-content-between">
-                                                                <h4>Daftar Paket Kiloan</h4>
-                                                                <button type="button"
-                                                                    class="btn mb-1 btn-primary font-weight-bold btn-sm tambah_kiloan_btn"
-                                                                    data-count="{{ $paket }}">Tambah
-                                                                    Paket <span class="btn-icon-right"><i
-                                                                            class="fa fa-plus"></i></span></button>
-                                                            </div>
-                                                            <div class="table-responsive">
-                                                                <table
-                                                                    class="table table-striped table-bordered zero-configuration">
-                                                                    <thead style="text-align: center;">
-                                                                        <tr>
-                                                                            <th>No</th>
-                                                                            <th>Kode Paket</th>
-                                                                            <th>Nama Paket</th>
-                                                                            <th>Harga</th>
-                                                                            <th>Lama Cuci</th>
-                                                                            <th>Minimal Berat</th>
-                                                                            <th>Aksi</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @foreach ($paket as $paket_kilo)
-                                                                            <tr>
-                                                                                <th class="align-middle text-center">
-                                                                                    {{ $loop->iteration }}
-                                                                                </th>
-                                                                                <th class="align-middle text-center">
-                                                                                    {{ $paket_kilo->kd_paket }}
-                                                                                </th>
-                                                                                <td>{{ $paket_kilo->nama_paket }}
-                                                                                </td>
-                                                                                <td>Rp.
-                                                                                    {{ number_format($paket_kilo->harga_paket, 2, ',', '.') }}
-                                                                                </td>
-                                                                                <td>{{ $paket_kilo->hari_paket }}
-                                                                                    Hari</td>
-                                                                                <td>{{ $paket_kilo->min_berat_paket }}
-                                                                                    Kg</td>
-                                                                                <td style="text-align: center;">
-                                                                                    <div class="dropdown custom-dropdown">
-                                                                                        <div data-toggle="dropdown"
-                                                                                            style="padding: 5px;">
-                                                                                            <i class="fa fa-ellipsis-v c-primary"
-                                                                                                style="font-size: 16px;"></i>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="dropdown-menu dropdown-menu-right">
-                                                                                            <a class="dropdown-item lihat_btn_kilo"
-                                                                                                href="#"
-                                                                                                role="button"
-                                                                                                data-lihat="{{ $paket_kilo->id }}"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#lihatModalKiloan">Lihat</a>
-                                                                                            <a class="dropdown-item"
-                                                                                                href="{{ url('/edit_paket_kiloan/' . $paket_kilo->id) }}">Edit</a>
-                                                                                        </div>
-                                                                                    </div>&nbsp;&nbsp;
-                                                                                    <a href="{{ url('/hapus_paket_kiloan/' . $paket_kilo->id) }}"
-                                                                                        style="color: grey;"><i
-                                                                                            class="fa fa-trash c-primary"
-                                                                                            style="font-size: 16px;"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        @endforeach
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
+                                <h4 class="card-title mb-5">Paket Satuan Baru</h4>
+                                <div class="form-validation">
+                                    <form class="form-valide" action="{{ url('/simpan_paket_satuan') }}" method="post" name="paket_satuan_baru_form">
+                                        @csrf
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-kode-barang">Kode Paket <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" id="val-kode-barang" name="kd_barang" readonly="readonly" value="{{ $max_code }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-nama">Nama Barang <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" id="val-nama" name="nama_barang" placeholder="Masukkan nama barang">
+                                                <div class="nama_barang_error"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-keterangan">Keterangan Barang <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="val-keterangan" name="ket_barang" placeholder="Masukkan keterangan barang">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">(Ukuran atau lainnya)</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="paket_satuan">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="card" style="background-color: #f4f3f9;">
-                                                        <div class="card-body">
-                                                            <div class="d-flex justify-content-between">
-                                                                <h4>Daftar Paket Satuan</h4>
-                                                                <button type="button"
-                                                                    class="btn mb-1 btn-primary font-weight-bold btn-sm tambah_satuan_btn"
-                                                                    data-count="{{ $paket }}">Tambah
-                                                                    Paket <span class="btn-icon-right"><i
-                                                                            class="fa fa-plus"></i></span></button>
-                                                            </div>
-                                                            <div class="table-responsive">
-                                                                <table
-                                                                    class="table table-striped table-bordered zero-configuration">
-                                                                    <thead style="text-align: center;">
-                                                                        <tr>
-                                                                            <th>No</th>
-                                                                            <th>Kode Barang</th>
-                                                                            <th>Nama Barang</th>
-                                                                            <th>Keterangan Barang</th>
-                                                                            <th>Harga</th>
-                                                                            <th>Aksi</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @foreach ($satuan as $paket_satu)
-                                                                            <tr>
-                                                                                <th class="align-middle text-center">
-                                                                                    {{ $loop->iteration }}
-                                                                                </th>
-                                                                                <th class="align-middle text-center">
-                                                                                    {{ $paket_satu->kd_barang }}
-                                                                                </th>
-                                                                                <td>{{ $paket_satu->nama_barang }}
-                                                                                </td>
-                                                                                <td>{{ $paket_satu->ket_barang }}
-                                                                                </td>
-                                                                                <td>Rp.
-                                                                                    {{ number_format($paket_satu->harga_barang, 2, ',', '.') }}
-                                                                                </td>
-                                                                                <td style="text-align: center;">
-                                                                                    <div class="dropdown custom-dropdown">
-                                                                                        <div data-toggle="dropdown"
-                                                                                            style="padding: 5px;">
-                                                                                            <i class="fa fa-ellipsis-v c-primary"
-                                                                                                style="font-size: 16px;"></i>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="dropdown-menu dropdown-menu-right">
-                                                                                            <a class="dropdown-item lihat_btn_satu"
-                                                                                                href="#"
-                                                                                                role="button"
-                                                                                                data-lihat="{{ $paket_satu->id }}"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#lihatModalSatuan">Lihat</a>
-                                                                                            <a class="dropdown-item"
-                                                                                                href="{{ url('/edit_paket_satuan/' . $paket_satu->id) }}">Edit</a>
-                                                                                        </div>
-                                                                                    </div>&nbsp;&nbsp;
-                                                                                    <a href="{{ url('/hapus_paket_satuan/' . $paket_satu->id) }}"
-                                                                                        style="color: grey;"><i
-                                                                                            class="fa fa-trash c-primary"
-                                                                                            style="font-size: 16px;"></i></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        @endforeach
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-harga">Harga Barang <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Rp.</span>
                                                     </div>
+                                                    <input type="text" class="form-control" id="val-harga" name="harga_barang" placeholder="Masukkan harga barang">
                                                 </div>
+                                                <div class="harga_barang_error"></div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-outlet">Outlet <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" id="val-outlet" name="id_outlet">
+                                                    <option value="" class="outlet_kosong">-- Pilih Outlet --</option>
+                                                    @foreach($outlets as $outlet)
+                                                    <option value="{{ $outlet->id }}">{{ $outlet->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="id_outlet_error"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-8 ml-auto">
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -209,9 +103,6 @@
     </div>
     </div>
     </div>
-
-    @include('admin.paket.form')
-    @include('admin.paket.lihat')
 
 @endsection
 

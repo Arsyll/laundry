@@ -94,7 +94,7 @@ class OutletController extends Controller
 
         return response()->json([
             'code' => 200,
-            'message' => 'Kategori berhasil diubah!',
+            'message' => 'Outlet berhasil diubah!',
             'data' => $status
         ]);
 
