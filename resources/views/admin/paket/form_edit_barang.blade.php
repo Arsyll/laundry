@@ -15,9 +15,9 @@
                             <h2 class="content-header-title float-left mb-0">Data Paket</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    {{--                                    <li class="breadcrumb-item"><a href="{{route('outlet.index')}}">Outlet</a> --}}
-                                    {{--                                    </li> --}}
-                                    <li class="breadcrumb-item active">Paket
+                                                                       <li class="breadcrumb-item"><a href="{{route('paket')}}">Paket</a>
+                                                                       </li>
+                                    <li class="breadcrumb-item active">Edit Paket Satuan
                                     </li>
                                 </ol>
                             </div>
@@ -25,8 +25,9 @@
                     </div>
                 </div>
 
+                <div class="col-12">
+                <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-5">Edit Paket Satuan</h4>
                     <div class="form-validation">
                         <form class="form-valide" action="{{ route('paket-satuan.update',$paket_satus->id) }}" method="post" name="edit_paket_satuan_form">
                             @csrf

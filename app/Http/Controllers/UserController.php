@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Outlet;
 
 class UserController extends Controller
 {
-    public function karyawan()
+    public function pengguna()
     {
-        $data['karyawan'] = User::where('role','Admin'||'Karyawan')->orderBy('nama','asc')->get();
+        $data['penggunas'] = User::all();
+        $data['outlets'] = Outlet::select('outlets.*')
+        ->count();
+        // $data['karyawan'] = User::where('role','Admin'||'Karyawan')->orderBy('nama','asc')->get();
         return view('owner.karyawan.index', $data);
     }
 

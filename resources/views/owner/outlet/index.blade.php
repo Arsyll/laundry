@@ -36,6 +36,8 @@
                                     Tambah Outlet
                                 </button>
                             </div>
+
+                            <div class="card-body">
                             <div class="table-responsive">
                                 <table id="myTable"class="table table-striped table-bordered zero-configuration">
                                     <thead style="text-align: center;">

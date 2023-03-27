@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PaketKiloan;
 use App\Models\PaketSatuan;
+use App\Models\Outlet;
 use App\Http\Requests\StorePaketKiloanRequest;
 use App\Http\Requests\UpdatePaketKiloanRequest;
 
@@ -24,8 +25,8 @@ class PaketKiloanController extends Controller
      */
     public function paket()
     {
-        $data['paket'] = PaketKiloan::orderBy('nama_paket','asc')->get();
-        $data['satuan'] = PaketSatuan::orderBy('nama_barang','asc')->get();
+        $data['paket'] = PaketKiloan::orderBy('kd_paket','asc')->get();
+        $data['satuan'] = PaketSatuan::orderBy('kd_barang','asc')->get();
         return view('admin.paket.index', $data);
     }
 
@@ -36,9 +37,24 @@ class PaketKiloanController extends Controller
      */
     public function create()
     {
-        $data['paket'] = PaketKiloan::orderBy('nama_paket','asc')->get();
-        $data['satuan'] = PaketSatuan::orderBy('nama_barang','asc')->get();
-        return view('admin.paket.index', $data);
+        $data['outlets'] = Outlet::all();
+    	$data['max'] = PaketKiloan::max('kd_paket');
+        $check_maks = PaketKiloan::select('paket_kilos.kd_paket')
+        ->count();
+        if($check_maks == null){
+            $data['max_code'] = "PK001";
+        }else{
+            $data['max_code'] = $data['max'][2].$data['max'][3].$data['max'][4];
+            $data['max_code']++;
+            if($data['max_code'] <= 9){
+                $data['max_code'] = "PK00".$data['max_code'];
+            }elseif ($data['max_code'] <= 99) {
+                $data['max_code'] = "PK0".$data['max_code'];
+            }elseif ($data['max_code'] <= 999) {
+                $data['max_code'] = "PK".$data['max_code'];
+            }
+        }
+        return view('admin.paket.form_paket' , $data);
     }
 
     /**
@@ -46,9 +62,29 @@ class PaketKiloanController extends Controller
      */
     public function store(StorePaketKiloanRequest $request)
     {
-        //
+        $request->validate = [
+            'kd_paket' => 'required|unique:paket_satuan',
+            'nama_paket' => 'required',
+            'harga_paket' => 'required',
+            'hari_paket' => 'required',
+            'min_berat_paket' => 'required',
+            'id_outlet' => 'required',
+        ];
+            $status = PaketKiloan::create([
+                'kd_paket' => $request['kd_paket'],
+                'nama_paket' => $request['nama_paket'],
+                'harga_paket' => $request['harga_paket'],
+                'hari_paket' => $request['hari_paket'],
+                'min_berat_paket' => $request['min_berat_paket'],
+                'id_outlet' => $request['id_outlet'],
+                'antar_jemput_paket' => $request['antar_jemput_paket'],
+            ]);
+            if ($status){
+                return redirect('/paket')->with('success','Data berhasil ditambahkan');
+            }else{
+                return redirect('/paket-satuan/create')->with('error','Data gagal ditambahkan');
+            }
     }
-
     /**
      * Display the specified resource.
      */

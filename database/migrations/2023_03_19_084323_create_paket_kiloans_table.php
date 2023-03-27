@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('harga_paket');
             $table->integer('hari_paket');
             $table->integer('min_berat_paket');
-            $table->boolean('antar_jemput_paket')->default(0);
+            $table->boolean('antar_jemput_paket')->nullable()->default(0);
             $table->integer('id_outlet');
             $table->timestamps();
         });

@@ -19,8 +19,8 @@
             </li>
             <li class=" nav-item"><a href="#"><i data-feather='grid'></i><span class="menu-title">Kelola Data</span></a>
                 <ul class="menu-content">
-                  <li class="nav-item @yield('karyawan')">
-                    <a href="{{route('karyawan')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Karyawan</span></a>
+                  <li class="nav-item @yield('pengguna')">
+                    <a href="{{route('pengguna')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Pengguna</span></a>
                   </li>
                   <li class="nav-item @yield('paket')">
                     <a href="{{route('paket')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Paket</span></a>
