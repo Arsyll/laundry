@@ -7,6 +7,7 @@ use App\Charts\HarianChart;
 use App\Charts\BulananChart;
 use App\Models\User;
 use App\Models\Transaksi;
+use App\Models\Outlet;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,6 +22,14 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    public function landing_page()
+    {
+        $data['customer'] = User::where('role','Customer')->count();
+        $data['karyawan'] = User::where('role','Karyawan')->count();
+        $data['outlet'] = Outlet::all()->count();
+        $data['cucian'] = Transaksi::whereIN('status_order',['Selesai','Diantar','Diterima'])->count();
+        return view('landing_page', $data);
+    }
     /**
      * Show the application dashboard.
      *

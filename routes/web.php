@@ -13,11 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing_page');
-});
-
 Auth::routes();
+Route::get('/', [App\Http\Controllers\HomeController::class, 'landing_page'])->name('landing_page');
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::get('/karyawan', [App\Http\Controllers\UserController::class, 'karyawan'])->name('karyawan');
 Route::get('/customer', [App\Http\Controllers\UserController::class, 'customer'])->name('customer');
