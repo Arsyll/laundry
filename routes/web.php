@@ -20,8 +20,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/customer', [App\Http\Controllers\UserController::class, 'customer'])->name('customer');
     Route::get('/paket', [App\Http\Controllers\PaketKiloanController::class, 'paket'])->name('paket');
 
-	Route::get('/sort_outlet_tabel_kiloan/{id}', 'CustomerController@sortOutletTabelKiloan');
-	Route::get('/sort_outlet_tabel_satuan/{id}', 'CustomerController@sortOutletTabelSatuan');
+	Route::get('/sort_outlet_tabel_kiloan/{id}',[App\Http\Controllers\CustomerController::class, 'sortOutletTabelKiloan']);
+	Route::get('/sort_outlet_tabel_satuan/{id}', [App\Http\Controllers\CustomerController::class, 'sortOutletTabelSatuan']);
 
     Route::resource('outlet', App\Http\Controllers\OutletController::class);
     Route::get('isioutlet', [App\Http\Controllers\OutletController::class, 'isi']);

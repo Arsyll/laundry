@@ -27,4 +27,12 @@ class Transaksi extends Model
         'harga_bayar',
         'harga_kembali',
     ];
+
+    public function CheckoutSatuan(){
+        return $this->hasOne(CheckoutSatuan::class);
+    }
+
+    public function CheckoutKiloan(){
+        return $this->hasOne(CheckoutKiloan::class);
+    }
 }

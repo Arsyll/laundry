@@ -81,6 +81,12 @@ $(function () {
           alamat: {
             required: true
           },
+          pilih_outlet: {
+            required: true
+          },
+          jenis_laundry: {
+            required: true
+          },
           country: {
             required: true
           },

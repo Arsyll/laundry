@@ -40,7 +40,7 @@
                     <a href="{{route('customer.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Kelola Customer</span></a>
                   </li>
                   <li class="nav-item @yield('transaksi')">
-                    <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Transaksi</span></a>
+                    <a href="{{route('transaksi.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Transaksi</span></a>
                   </li>
                 </ul>
             </li>

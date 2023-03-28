@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
+use App\Models\CheckoutKiloan;
+use App\Models\CheckoutSatuan;
 use App\Http\Requests\StoreTransaksiRequest;
 use App\Http\Requests\UpdateTransaksiRequest;
 
@@ -13,7 +15,9 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        $data['kiloan'] = CheckoutKiloan::orderBy('created_at','desc')->get();
+        $data['satuan'] = CheckoutSatuan::orderBy('created_at','desc')->get();
+        return view('admin.transaksi.index', $data);
     }
 
     /**

@@ -19,4 +19,8 @@ class CheckoutKiloan extends Model
         'harga_antar',
         'harga_total',
     ];
+
+    public function transaksi(){
+        return $this->belongsTo(Transaksi::class, 'kd_invoice');
+    }
 }

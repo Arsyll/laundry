@@ -66,10 +66,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $max = User::max('kd_pengguna');
+        if($max == null){
+            $max_user = "U0001";
+        }else{
+            $max_user = $max[1].$max[2].$max[3].$max[4];
+                    $max_user++;
+                    if($max_user <= 9){
+                        $max_user = "U000".$max_user;
+                    }elseif ($max_user <= 99) {
+                        $max_user = "U00".$max_user;
+                    }elseif ($max_user <= 999) {
+                        $max_user = "U0".$max_user;
+                    }elseif ($max_user <= 9999) {
+                        $max_user = "U".$max_user;
+                    }
+            }
         return User::create([
             'nama' => $data['nama'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'kd_pengguna' => $max_user,
         ]);
     }
 }
