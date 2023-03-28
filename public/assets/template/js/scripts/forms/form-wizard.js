@@ -66,29 +66,19 @@ $(function () {
       var $this = $(this);
       $this.validate({
         rules: {
-          username: {
+          nama: {
             required: true
           },
           email: {
             required: true
           },
-          password: {
+          no_telp: {
             required: true
           },
-          'confirm-password': {
-            required: true,
-            equalTo: '#password'
-          },
-          'first-name': {
+          jenis_kelamin: {
             required: true
           },
-          'last-name': {
-            required: true
-          },
-          address: {
-            required: true
-          },
-          landmark: {
+          alamat: {
             required: true
           },
           country: {

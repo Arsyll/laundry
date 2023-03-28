@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('paket_kiloan', function (Blueprint $table) {
-            $table->string('kd_paket')->after('id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('kd_pengguna')->after('id');
         });
     }
 
@@ -21,7 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('paket_kiloan', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
+            //
         });
     }
 };

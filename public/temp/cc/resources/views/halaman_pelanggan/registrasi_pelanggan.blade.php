@@ -19,10 +19,10 @@
 .card-line{
     margin: 0;
     box-shadow: 0 0 1px 1px #aaa;
-    -moz-user-select: none;  
-    -webkit-user-select: none;  
-    -ms-user-select: none;  
-    -o-user-select: none;  
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
     user-select: none;
 }
 
@@ -351,7 +351,7 @@
                                         <h4 class="mt-3 mb-3">Pilih Paket Laundry</h4>
                                         <hr>
                                         <div class="row" id="daftar_paket_kiloan">
-                                            
+
                                         </div>
                                         <div class="row jenis_paket_error" hidden="">
                                             <div class="col-md-12 text-left">
@@ -426,7 +426,7 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-12" id="daftar_paket_satuan">
-                                                
+
                                             </div>
                                             <div class="col-md-12 mt-2 text-left jumlah_barang_error" hidden="">
                                                 <span style='color: red;'>Silakan pilih barang terlebih dahulu</span>

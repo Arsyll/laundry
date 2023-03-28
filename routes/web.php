@@ -17,13 +17,18 @@ Route::get('/', [App\Http\Controllers\LandingPageController::class, 'index'])->n
 Auth::routes();
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-    Route::get('/pengguna', [App\Http\Controllers\UserController::class, 'pengguna'])->name('pengguna');
     Route::get('/customer', [App\Http\Controllers\UserController::class, 'customer'])->name('customer');
     Route::get('/paket', [App\Http\Controllers\PaketKiloanController::class, 'paket'])->name('paket');
 
+	Route::get('/sort_outlet_tabel_kiloan/{id}', 'CustomerController@sortOutletTabelKiloan');
+	Route::get('/sort_outlet_tabel_satuan/{id}', 'CustomerController@sortOutletTabelSatuan');
 
     Route::resource('outlet', App\Http\Controllers\OutletController::class);
     Route::get('isioutlet', [App\Http\Controllers\OutletController::class, 'isi']);
+
+    Route::resource('pengguna', App\Http\Controllers\PenggunaController::class);
+
+    Route::resource('customer', App\Http\Controllers\CustomerController::class);
 
     Route::resource('paket-kiloan', App\Http\Controllers\PaketKiloanController::class);
 

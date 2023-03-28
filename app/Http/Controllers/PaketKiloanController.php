@@ -7,6 +7,7 @@ use App\Models\PaketSatuan;
 use App\Models\Outlet;
 use App\Http\Requests\StorePaketKiloanRequest;
 use App\Http\Requests\UpdatePaketKiloanRequest;
+use Illuminate\Http\Request;
 
 class PaketKiloanController extends Controller
 {
@@ -96,24 +97,53 @@ class PaketKiloanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PaketKiloan $paketKiloan)
+    public function edit($id)
     {
-        //
+        $data['outlets'] = Outlet::all();
+    	$data['paket_kilos'] = PaketKiloan::find($id);
+    	return view('admin.paket.form_edit_paket', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePaketKiloanRequest $request, PaketKiloan $paketKiloan)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate = [
+            'nama_paket' => 'required',
+            'harga_paket' => 'required',
+            'hari_paket' => 'required',
+            'min_berat_paket' => 'required',
+            'id_outlet' => 'required',
+        ];
+        $status = PaketKiloan::find($id);
+
+            $status->update([
+                'nama_paket' => $request['nama_paket'],
+                'harga_paket' => $request['harga_paket'],
+                'hari_paket' => $request['hari_paket'],
+                'min_berat_paket' => $request['min_berat_paket'],
+                'antar_jemput_paket' => $request['antar_jemput_paket'],
+                'id_outlet' => $request['id_outlet'],
+            ]);
+            if ($status){
+                return redirect('/paket')->with('success','Data berhasil diubah');
+            }else{
+                return redirect('/paket-kiloan/edit',$id)->with('error','Data gagal diubah');
+            }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PaketKiloan $paketKiloan)
+    public function destroy($id)
     {
-        //
+        $paket = PaketKiloan::find($id);
+        $status = $paket->delete();
+        if ($status){
+            return redirect('/paket')->with('success','Data berhasil dihapus');
+        }else{
+            return redirect('/paket')->with('error','Data gagal dihapus');
+        }
     }
 }

@@ -115,7 +115,7 @@ class PaketSatuanController extends Controller
             if ($status){
                 return redirect('/paket')->with('success','Data berhasil diubah');
             }else{
-                return redirect('/paket-satuan/update',$id)->with('error','Data gagal diubah');
+                return redirect('/paket-satuan/edit',$id)->with('error','Data gagal diubah');
             }
     }
 
@@ -124,8 +124,8 @@ class PaketSatuanController extends Controller
      */
     public function destroy($id)
     {
-        $produk = PaketSatuan::find($id);
-        $status = $produk->delete();
+        $satuan = PaketSatuan::find($id);
+        $status = $satuan->delete();
         if ($status){
             return redirect('/paket')->with('success','Data berhasil dihapus');
         }else{

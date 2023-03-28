@@ -100,14 +100,12 @@
                                                                                                 <i data-feather="eye"
                                                                                                     class="mr-50"></i>
                                                                                                 <span>Lihat</span>
-                                                                                                <a
-                                                                                                    class="dropdown-item"id="update-btn"href="#"data-id="data.id"data-toggle="modal"data-target="#form-modal-edit">
-                                                                                                    <i
-                                                                                                        data-feather="edit-2"class="mr-50"></i>
+                                                                                                <a class="dropdown-item"id="update-btn"href="{{ route('paket-kiloan.edit',$paket_kilo->id) }}">
+                                                                                                    <i data-feather="edit-2" class="mr-50"></i>
                                                                                                     <span>Edit</span>
                                                                                                 </a>
                                                                                                 <a
-                                                                                                    class="dropdown-item"id="del-btn"href="#"data-id="data.id">
+                                                                                                    class="dropdown-item" id="del-kiloan-btn" href="#"data-id="{{ $paket_kilo->id }}">
                                                                                                     <i data-feather="trash"
                                                                                                         class="mr-50"></i>
                                                                                                     <span>Hapus</span>
@@ -242,6 +240,48 @@
                 if (result.value) {
                     $.ajax({
                         'url': '{{url('paket-satuan')}}/' + id,
+                        'type': 'POST',
+                        'data': {
+                            '_method': 'DELETE',
+                            '_token': '{{csrf_token()}}'
+                        },
+                        success: function (response) {
+                            if (response == 1) {
+                                        toastr.error('Data gagal dihapus!', 'Gagal!', {
+                                            closeButton: true,
+                                            tapToDismiss: false
+                                        });
+                                    } else {
+                                        toastr.success('Data berhasil dihapus!', 'Berhasil!', {
+                                            closeButton: true,
+                                            tapToDismiss: false
+                                        });
+                                        location.reload();
+                                    }
+
+                        }
+                    });
+                } else {
+                    console.log(`dialog was dismissed by ${result.dismiss}`)
+                }
+            });
+        });
+        $(document).on('click', '#del-kiloan-btn', function () {
+            var id = $(this).data('id');
+            Swal.fire({
+                icon: 'error',
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#28C76F',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            })
+            .then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        'url': '{{url('paket-kiloan')}}/' + id,
                         'type': 'POST',
                         'data': {
                             '_method': 'DELETE',
