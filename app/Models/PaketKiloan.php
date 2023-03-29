@@ -19,4 +19,10 @@ class PaketKiloan extends Model
         'antar_jemput_paket',
         'id_outlet',
     ];
+    public function outlet(){
+        return $this->belongsTo(Outlet::class, 'id_outlet');
+    }
+    public function CheckoutKiloan(){
+        return $this->hasOne(CheckoutKiloan::class);
+    }
 }

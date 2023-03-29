@@ -23,4 +23,7 @@ class CheckoutKiloan extends Model
     public function transaksi(){
         return $this->belongsTo(Transaksi::class, 'kd_invoice');
     }
+    public function paket(){
+        return $this->belongsTo(PaketKiloan::class, 'id_paket');
+    }
 }

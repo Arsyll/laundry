@@ -95,11 +95,6 @@
                                                                                         </button>
 
                                                                                         <div class="dropdown-menu">
-                                                                                            <a
-                                                                                                class="dropdown-item lihat_btn_kilo"id="lihat-btn"href="#"data-id="data.id"data-toggle="modal"data-target="#form-modal-lihat">
-                                                                                                <i data-feather="eye"
-                                                                                                    class="mr-50"></i>
-                                                                                                <span>Lihat</span>
                                                                                                 <a class="dropdown-item"id="update-btn"href="{{ route('paket-kiloan.edit',$paket_kilo->id) }}">
                                                                                                     <i data-feather="edit-2" class="mr-50"></i>
                                                                                                     <span>Edit</span>
@@ -175,9 +170,6 @@
                                                                                         </button>
 
                                                                                         <div class="dropdown-menu">
-                                                                                            <a class="dropdown-item lihat_btn_satu" id="lihat-btn" href="">
-                                                                                                <i data-feather="eye" class="mr-50"></i>
-                                                                                                <span>Lihat</span>
                                                                                                 <a class="dropdown-item"id="update-btn"href="{{ route('paket-satuan.edit',$paket_satu->id) }}">
                                                                                                     <i data-feather="edit-2" class="mr-50"></i>
                                                                                                     <span>Edit</span>

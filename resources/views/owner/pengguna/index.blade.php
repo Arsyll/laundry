@@ -155,15 +155,6 @@
                                                                                     </button>
 
                                                                                     <div class="dropdown-menu">
-                                                                                        <a
-                                                                                            class="dropdown-item lihat_btn_kilo"id="lihat-btn"href="#"data-id="data.id"data-toggle="modal"data-target="#form-modal-lihat">
-                                                                                            <i data-feather="eye"
-                                                                                                class="mr-50"></i>
-                                                                                            <span>Lihat</span>
-                                                                                            <a class="dropdown-item"id="update-btn"href="{{ route('paket-kiloan.edit',$pengguna->id) }}">
-                                                                                                <i data-feather="edit-2" class="mr-50"></i>
-                                                                                                <span>Edit</span>
-                                                                                            </a>
                                                                                             <a
                                                                                                 class="dropdown-item" id="del-pengguna-btn" href="#"data-id="{{ $pengguna->id }}">
                                                                                                 <i data-feather="trash"

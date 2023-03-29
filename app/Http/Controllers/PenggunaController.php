@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Outlet;
+use App\Models\Transaksi;
 
 class PenggunaController extends Controller
 {
@@ -19,7 +20,78 @@ class PenggunaController extends Controller
         // $data['karyawan'] = User::where('role','Admin'||'Karyawan')->orderBy('nama','asc')->get();
         return view('owner.pengguna.index', $data);
     }
+    public function laporan()
+    {
+    	$data['users'] = User::all();
+    	$data['diproses'] = Transaksi::where('status_order', 'Diproses')
+    	->count();
+    	$data['selesai'] = Transaksi::where('status_order', 'Selesai')
+    	->count();
+    	$data['diantar'] = Transaksi::where('status_order', 'Diantar')
+    	->count();
+    	$data['diambil'] = Transaksi::where('status_order', 'Diterima')
+    	->count();
+    	return view('owner.laporan.halaman_laporan_pegawai', $data);
+    }
 
+    public function laporan_riwayat($id)
+    {
+    	$users = User::find($id);
+    	$riwayats = Transaksi::join('users', 'users.id', '=', 'transaksi.id_karyawan')
+    	->join('outlet', 'outlet.id', '=', 'transaksi.id_outlet')
+    	->select('transaksi.*', 'outlet.nama as nama_outlet', 'users.nama')
+    	->where('transaksi.id_karyawan', $users->id)
+    	->orderBy('transaksi.tgl_pemberian', 'DESC')
+    	->get();
+    	return view('owner.laporan.halaman_laporan_riwayat', compact('users', 'id', 'riwayats'));
+    }
+
+    public function cetakpdf(Request $req, $id)
+    {
+    	if($req->check_semua == 1){
+    		$users = User::find($id);
+    		$riwayats = Transaksi::join('users', 'users.id', '=', 'transaksi.id_karyawan')
+    	->join('outlet', 'outlet.id', '=', 'transaksi.id_outlet')
+    	->select('transaksi.*', 'outlet.nama as nama_outlet', 'users.nama')
+    	->where('transaksi.id_karyawan', $users->id)
+    	->orderBy('transaksi.tgl_pemberian', 'DESC')
+    	->get();
+	    	$tanggal = "Semua Invoice";
+	    	$start_date2 = "";
+	    	$end_date2 = "";
+
+	    	$pdf = PDF::loadview('halaman_laporan.pdf_laporan_pegawai', [
+	    		'users' => $users,
+	            'riwayats' => $riwayats,
+	            'tanggal' => $tanggal,
+	            'start_date2' => $start_date2,
+	            'end_date2' => $end_date2
+	        ]);
+	        return $pdf->stream();
+    	}else{
+    		$users = User::find($id);
+    		$start_date = $req->start_date;
+    		$end_date = $req->end_date;
+    		$start_date2 = $start_date[6].$start_date[7].$start_date[8].$start_date[9].'-'.$start_date[0].$start_date[1].'-'.$start_date[3].$start_date[4];
+    		$end_date2 = $end_date[6].$end_date[7].$end_date[8].$end_date[9].'-'.$end_date[0].$end_date[1].'-'.$end_date[3].$end_date[4];
+    		$riwayats = Transaksi::join('users', 'users.id', '=', 'transaksi.id_karyawan')
+    	->join('outlet', 'outlet.id', '=', 'transaksi.id_outlet')
+    	->select('transaksi.*', 'outlet.nama as nama_outlet', 'users.nama')
+    	->where('transaksi.id_karyawan', $users->id)
+    	->orderBy('transaksi.tgl_pemberian', 'DESC')
+    	->get();
+	    	$tanggal = "";
+
+	    	$pdf = PDF::loadview('owner.laporan.pdf_laporan_pegawai', [
+	            'users' => $users,
+	            'riwayats' => $riwayats,
+	            'tanggal' => $tanggal,
+	            'start_date2' => $start_date2,
+	            'end_date2' => $end_date2
+	        ]);
+	        return $pdf->stream();
+    	}
+    }
     /**
      * Show the form for creating a new resource.
      */

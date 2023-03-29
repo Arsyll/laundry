@@ -17,4 +17,10 @@ class PaketSatuan extends Model
         'harga_barang',
         'id_outlet',
     ];
+    public function outlet(){
+        return $this->belongsTo(Outlet::class, 'id_outlet');
+    }
+    public function CheckoutSatuan(){
+        return $this->hasOne(CheckoutSatuan::class);
+    }
 }

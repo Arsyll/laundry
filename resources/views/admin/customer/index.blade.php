@@ -36,7 +36,6 @@
                                             <th>Email</th>
                                             <th>Alamat</th>
                                             <th>No Telpon</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -48,10 +47,6 @@
                                                 <td>{{ $item->email }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->no_telp }}</td>
-                                                <td>
-                                                    <a href=" {{ url('customers', $item->id) }} " class="btn btn-sm btn-primary"
-                                                        style="color:white">Detail</a>
-                                                </td>
                                             </tr>
                                             <?php $no++; ?>
                                         @endforeach

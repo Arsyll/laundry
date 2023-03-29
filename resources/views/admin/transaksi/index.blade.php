@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Outlet')
+@section('title', 'Transaksi')
 @section('transaksi', 'active')
 
 @section('content')
@@ -28,9 +28,6 @@
                         <div class="card">
                             <div class="card-header">
                                 <ul class="nav nav-tabs mb-3" role="tablist">
-                                    <li class="nav-item"><a class="nav-link transaksi_kiloan_tab active" data-toggle="tab"
-                                            href="#transaksi_kiloan">Transaksi Kiloan</a>
-                                    </li>
                                     <li class="nav-item"><a class="nav-link transaksi_satuan_tab" data-toggle="tab"
                                             href="#transaksi_satuan">Transaksi Satuan</a>
                                     </li>
@@ -40,7 +37,7 @@
                                 <!-- Nav tabs -->
                                 <div class="default-tab">
                                     <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="transaksi_kiloan" role="tabpanel">
+                                        {{-- <div class="tab-pane fade show active" id="transaksi_kiloan" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="card" style="background-color: #f4f3f9;">
@@ -59,32 +56,37 @@
                                                                     <thead style="text-align: center;">
                                                                         <tr>
                                                                             <th>No</th>
-                                                                            <th>Kode Transaksi</th>
-                                                                            <th>Nama Transaksi</th>
-                                                                            <th>Harga</th>
-                                                                            <th>Lama Cuci</th>
-                                                                            <th>Minimal Berat</th>
+                                                                            <th>Outlet</th>
+                                                                            <th>Kode Invoice</th>
+                                                                            <th>Customer</th>
+                                                                            <th>Status Lundry</th>
+                                                                            <th>Pembayaran</th>
+                                                                            <th>Total</th>
                                                                             <th>Aksi</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach ($kiloan as $transaksi_kilo)
+                                                                        @foreach ($kiloan as $transaksi_satu)
                                                                             <tr>
-                                                                                <th class="align-middle text-center">
+                                                                                <td class="align-middle text-center">
                                                                                     {{ $loop->iteration }}
-                                                                                </th>
-                                                                                <th class="align-middle text-center">
-                                                                                    {{ $transaksi_kilo->kd_transaksi }}
-                                                                                </th>
-                                                                                <td>{{ $transaksi_kilo->nama_transaksi }}
                                                                                 </td>
-                                                                                <td>Rp.
-                                                                                    {{ number_format($transaksi_kilo->harga_transaksi, 2, ',', '.') }}
+                                                                                <td>
+                                                                                    {{ $transaksi_satu->outlet->nama }}
                                                                                 </td>
-                                                                                <td>{{ $transaksi_kilo->hari_transaksi }}
-                                                                                    Hari</td>
-                                                                                <td>{{ $transaksi_kilo->min_berat_transaksi }}
-                                                                                    Kg</td>
+                                                                                <td>
+                                                                                    {{ $transaksi_satu->kd_invoice }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{ $transaksi_satu->user->nama }}
+                                                                                </td>
+                                                                                <td>{{ $transaksi_satu->status_order }}
+                                                                                </td>
+                                                                                <td>{{ $transaksi_satu->status_payment }}
+                                                                                </td>
+                                                                                <td>{{ $transaksi_satu->harga_total }}
+                                                                                </td>
+                                                                                </td>
                                                                                 <td style="text-align: center;">
                                                                                     <div class="dropdown">
                                                                                         <button type="button"
@@ -95,17 +97,15 @@
                                                                                         </button>
 
                                                                                         <div class="dropdown-menu">
-                                                                                            <a
-                                                                                                class="dropdown-item lihat_btn_kilo"id="lihat-btn"href="#"data-id="data.id"data-toggle="modal"data-target="#form-modal-lihat">
-                                                                                                <i data-feather="eye"
-                                                                                                    class="mr-50"></i>
+                                                                                            <a class="dropdown-item lihat_btn_satu" id="lihat-btn" href="">
+                                                                                                <i data-feather="eye" class="mr-50"></i>
                                                                                                 <span>Lihat</span>
-                                                                                                <a class="dropdown-item"id="update-btn"href="{{ route('transaksi-kiloan.edit',$transaksi_kilo->id) }}">
+                                                                                                <a class="dropdown-item"id="update-btn"href="{{ route('checkout-satuan.edit',$transaksi_satu->id) }}">
                                                                                                     <i data-feather="edit-2" class="mr-50"></i>
                                                                                                     <span>Edit</span>
                                                                                                 </a>
                                                                                                 <a
-                                                                                                    class="dropdown-item" id="del-kiloan-btn" href="#"data-id="{{ $transaksi_kilo->id }}">
+                                                                                                    class="dropdown-item" id="del-satuan-btn" href="#"data-id="{{ $transaksi_satu->id }}">
                                                                                                     <i data-feather="trash"
                                                                                                         class="mr-50"></i>
                                                                                                     <span>Hapus</span>
@@ -122,8 +122,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="transaksi_satuan">
+                                        </div> --}}
+                                        {{-- <div class="tab-pane fade" id="transaksi_satuan"> --}}
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="card" style="background-color: #f4f3f9;">
@@ -132,7 +132,7 @@
                                                                 <h4>Daftar Transaksi Satuan</h4>
                                                                 <button type="button"
                                                                     class="btn mb-1 btn-primary font-weight-bold btn-sm tambah_satuan_btn"
-                                                                    data-count="{{ route('transaksi.create') }}">Tambah
+                                                                    data-count="{{ route('checkout-satuan.create') }}">Tambah
                                                                     Transaksi <span class="btn-icon-right"><i
                                                                             class="fa fa-plus"></i></span></button>
                                                             </div>
@@ -147,9 +147,7 @@
                                                                             <th>Customer</th>
                                                                             <th>Status Lundry</th>
                                                                             <th>Pembayaran</th>
-                                                                            <th>Jenis</th>
                                                                             <th>Total</th>
-                                                                            <th>Aksi</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -159,39 +157,20 @@
                                                                                     {{ $loop->iteration }}
                                                                                 </td>
                                                                                 <td>
+                                                                                    {{ $transaksi_satu->outlet->nama }}
+                                                                                </td>
+                                                                                <td>
                                                                                     {{ $transaksi_satu->kd_invoice }}
                                                                                 </td>
-                                                                                <td>{{ $transaksi_satu->transaksi->status_order }}
+                                                                                <td>
+                                                                                    {{ $transaksi_satu->user->nama }}
                                                                                 </td>
-                                                                                <td>{{ $transaksi_satu->transaksi->status_payment }}
+                                                                                <td>{{ $transaksi_satu->status_order }}
                                                                                 </td>
-                                                                                <td>{{ $transaksi_satu->transaksi->id_outlet }}
+                                                                                <td>{{ $transaksi_satu->status_payment }}
                                                                                 </td>
-                                                                                <td style="text-align: center;">
-                                                                                    <div class="dropdown">
-                                                                                        <button type="button"
-                                                                                            class="btn btn-sm dropdown-toggle hide-arrow"
-                                                                                            data-toggle="dropdown">
-                                                                                            <i
-                                                                                                data-feather="more-vertical"></i>
-                                                                                        </button>
-
-                                                                                        <div class="dropdown-menu">
-                                                                                            <a class="dropdown-item lihat_btn_satu" id="lihat-btn" href="">
-                                                                                                <i data-feather="eye" class="mr-50"></i>
-                                                                                                <span>Lihat</span>
-                                                                                                <a class="dropdown-item"id="update-btn"href="{{ route('transaksi-satuan.edit',$transaksi_satu->id) }}">
-                                                                                                    <i data-feather="edit-2" class="mr-50"></i>
-                                                                                                    <span>Edit</span>
-                                                                                                </a>
-                                                                                                <a
-                                                                                                    class="dropdown-item" id="del-satuan-btn" href="#"data-id="{{ $transaksi_satu->id }}">
-                                                                                                    <i data-feather="trash"
-                                                                                                        class="mr-50"></i>
-                                                                                                    <span>Hapus</span>
-                                                                                                </a>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                <td>{{ $transaksi_satu->harga_total }}
+                                                                                </td>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach
@@ -353,7 +332,7 @@
             e.preventDefault();
             var cek_count = $(this).attr('data-count');
             if (parseInt(cek_count) != 0) {
-                window.open("{{ url('/transaksi/create') }}", "_self");
+                window.open("{{ url('/checkout-kiloan/create') }}", "_self");
             } else {
                 outlet_kosong();
             }
@@ -363,7 +342,7 @@
             e.preventDefault();
             var cek_count = $(this).attr('data-count');
             if (parseInt(cek_count) != 0) {
-                window.open("{{ url('/transaksi/create') }}", "_self");
+                window.open("{{ url('/checkout-satuan/create') }}", "_self");
             } else {
                 outlet_kosong();
             }

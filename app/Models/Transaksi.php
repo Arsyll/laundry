@@ -28,8 +28,15 @@ class Transaksi extends Model
         'harga_kembali',
     ];
 
-    public function CheckoutSatuan(){
-        return $this->hasOne(CheckoutSatuan::class);
+    public function checkoutsatuan(){
+        return $this->belongsTo(CheckoutSatuan::class, 'kd_invoice');
+    }
+
+    public function outlet(){
+        return $this->belongsTo(Outlet::class, 'id_outlet');
+    }
+    public function user(){
+        return $this->belongsTo(User::class, 'id_customer');
     }
 
     public function CheckoutKiloan(){

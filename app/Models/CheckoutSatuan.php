@@ -20,6 +20,9 @@ class CheckoutSatuan extends Model
         'harga_total',
     ];
     public function transaksi(){
-        return $this->belongsTo(Transaksi::class, 'kd_invoice');
+        return $this->hasOne(Transaksi::class);
+    }
+    public function paketsatuan(){
+        return $this->belongsTo(PaketSatuan::class, 'id_barang');
     }
 }

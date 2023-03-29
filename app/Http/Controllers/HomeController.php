@@ -62,11 +62,11 @@ class HomeController extends Controller
         $data['harian'] = $hari->build();
         $data['bulanan'] = $bulan->build();
         if (Auth::user()->role == 'Owner') {
-            return view('owner.dashboard.index');
+            return view('owner.dashboard.index', $data);
         }elseif (Auth::user()->role == 'Admin') {
-            return view('admin.dashboard.index');
+            return view('admin.dashboard.index', $data);
         }elseif (Auth::user()->role == 'Karyawan') {
-            return view('karyawan.dashboard.index');
+            return view('karyawan.dashboard.index', $data);
         }else {
             return view('customer.dashboard.index', $data);
         }

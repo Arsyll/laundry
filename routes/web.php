@@ -19,6 +19,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
     Route::get('/customer', [App\Http\Controllers\UserController::class, 'customer'])->name('customer');
     Route::get('/paket', [App\Http\Controllers\PaketKiloanController::class, 'paket'])->name('paket');
+    Route::get('/laporan-karyawan', [App\Http\Controllers\PenggunaController::class, 'laporan'])->name('laporan_karyawan');
+	Route::get('/laporan_pegawai_riwayat/{id}', [App\Http\Controllers\PenggunaController::class, 'laporan_riwayat'])->name('laporan_karyawan_riwayat');
+    Route::get('/laporan-transaksi', [App\Http\Controllers\TransaksiController::class, 'laporan'])->name('laporan_transaksi');
+	Route::post('/pdf_laporan_pegawai/{id}', [App\Http\Controllers\PenggunaController::class, 'cetakpdf'])->name('cetak_laporan_pegawai');
 
 	Route::get('/sort_outlet_tabel_kiloan/{id}',[App\Http\Controllers\CustomerController::class, 'sortOutletTabelKiloan']);
 	Route::get('/sort_outlet_tabel_satuan/{id}', [App\Http\Controllers\CustomerController::class, 'sortOutletTabelSatuan']);
@@ -39,4 +43,5 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('checkout-satuan', App\Http\Controllers\CheckoutSatuanController::class);
 
     Route::resource('transaksi', App\Http\Controllers\TransaksiController::class);
+
 });

@@ -13,47 +13,56 @@
     </div>
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
+
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class="nav-item @yield('dashboard')"><a class="d-flex align-items-center" href="{{ url('dashboard') }}"><i
-                        data-feather='home'></i><span class="menu-title">Dashboard</span></a>
+                data-feather='home'></i><span class="menu-title">Dashboard</span></a>
             </li>
+            @can('isAdmin')
             <li class=" nav-item"><a href="#"><i data-feather='grid'></i><span class="menu-title">Kelola Data</span></a>
                 <ul class="menu-content">
-                  <li class="nav-item @yield('pengguna')">
-                    <a href="{{route('pengguna.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Pengguna</span></a>
-                  </li>
-                  <li class="nav-item @yield('paket')">
-                    <a href="{{route('paket')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Paket</span></a>
-                  </li>
-                  <li class="nav-item @yield('outlet')">
-                    <a href="{{route('outlet.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Outlet</span></a>
-                  </li>
+                    <li class="nav-item @yield('pengguna')">
+                        <a href="{{route('pengguna.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Pengguna</span></a>
+                    </li>
+                    <li class="nav-item @yield('paket')">
+                        <a href="{{route('paket')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Paket</span></a>
+                    </li>
+                    <li class="nav-item @yield('outlet')">
+                        <a href="{{route('outlet.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Outlet</span></a>
+                    </li>
                 </ul>
             </li>
+            @endcan
 
-            <li class=" nav-item"><a href="#"><i data-feather='server'></i><span class="menu-title">Layanan</span></a>
-                <ul class="menu-content">
-                  <li class="nav-item @yield('register_customer')">
-                    <a href="{{ route('customer.create') }}"><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Register Customer</span></a>
-                  </li>
-                  <li class="nav-item @yield('customer')">
-                    <a href="{{route('customer.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Kelola Customer</span></a>
-                  </li>
-                  <li class="nav-item @yield('transaksi')">
-                    <a href="{{route('transaksi.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Transaksi</span></a>
-                  </li>
-                </ul>
-            </li>
-            <li class=" nav-item"><a href="#"><i data-feather='file-text'></i><span class="menu-title">Laporan</span></a>
-                <ul class="menu-content">
-                  <li class="nav-item @yield('laporan_karyawan')">
-                    <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Laporan Karyawan</span></a>
-                  </li>
-                  <li class="nav-item @yield('laporan_transaksi')">
-                    <a href=""><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Laporan Transaksi</span></a>
-                  </li>
-                </ul>
-            </li>
+@cannot('isCustomer')
+@cannot('isOwner')
+
+<li class=" nav-item"><a href="#"><i data-feather='server'></i><span class="menu-title">Layanan</span></a>
+    <ul class="menu-content">
+      <li class="nav-item @yield('register_customer')">
+        <a href="{{ route('customer.create') }}"><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Register Customer</span></a>
+      </li>
+      <li class="nav-item @yield('customer')">
+        <a href="{{route('customer.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Kelola Customer</span></a>
+      </li>
+      <li class="nav-item @yield('transaksi')">
+        <a href="{{route('transaksi.index')}}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Transaksi</span></a>
+      </li>
+    </ul>
+</li>
+@endcannot
+
+<li class=" nav-item"><a href="#"><i data-feather='file-text'></i><span class="menu-title">Laporan</span></a>
+    <ul class="menu-content">
+      <li class="nav-item @yield('laporan_karyawan')">
+        <a href="{{ route('laporan_karyawan') }}"><i data-feather='circle'></i><span class="menu-item" data-i18n="View">Laporan Karyawan</span></a>
+      </li>
+      {{-- <li class="nav-item @yield('laporan_transaksi')">
+        <a href="{{ route('laporan_transaksi') }}"><i data-feather='circle'></i><span class="menu-item" data-i18n="List">Laporan Transaksi</span></a>
+      </li> --}}
+    </ul>
+</li>
+@endcannot
 
         </ul>
     </div>
